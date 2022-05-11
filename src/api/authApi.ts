@@ -2,6 +2,8 @@
 import StorageKeys from "../constants/storage-keys";
 import axiosClient from "./axiosClient";
 
+const accessToken = localStorage.getItem(StorageKeys.access)
+
 const authApi = {
     checkAdmin(data:any){
         const url = 'decentralization/';
@@ -13,7 +15,6 @@ const authApi = {
     },
     async getUser(params:any) {
         const newParams = { ...params }
-        const accessToken = localStorage.getItem(StorageKeys.access)
         const url = `users/`;
         const response = await axiosClient.get(url, {
             params: { ...newParams },
@@ -25,9 +26,6 @@ const authApi = {
     },
     async getProfile(params:any) {
         const data = { ...params }
-      
-        const accessToken = localStorage.getItem(StorageKeys.access)
-        
         const response = await axiosClient.post(`/detail/`, {
             data: { ...data },
             headers: {
@@ -38,8 +36,6 @@ const authApi = {
     },
     async changeProfile(params:any) {
         const newParams = { ...params }
-      
-        const accessToken = localStorage.getItem(StorageKeys.access)
         const response = await axiosClient.post(`/changeProfile/`, {
             data: { ...newParams },
             headers: {

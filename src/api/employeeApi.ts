@@ -1,8 +1,17 @@
 import axiosClient from "./axiosClient";
+import StorageKeys from "../constants/storage-keys";
+
+const accessToken = localStorage.getItem(StorageKeys.access)
 
 const employeeApi = {
+    
     async getAll() {
-        const response = await axiosClient.get('employee/')
+        const response = await axiosClient.get('employee/',
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
         return {
             ...response,
              
@@ -17,18 +26,23 @@ const employeeApi = {
             params: {
                 ...params,
             },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
             paramsSerializer:  (params) => {
                 return qs.stringify(params, { arrayFormat: 'repeat' })
             },
         })
-        console.log("res:",response)
         return {
             ...response,
         }
     },
     getEmployeeDetail(id:any) {
         const url = `/employee/${id}/`;
-        return axiosClient.get(url);
+        return axiosClient.get(url,{
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
     },
     async getEmployeeGroup(idGroup:any) {
         const params ={
@@ -39,6 +53,9 @@ const employeeApi = {
            params: {
                ...params,
            },
+           headers: {
+            Authorization: `Bearer ${accessToken}`
+        },
            paramsSerializer:  (params) => {
                return qs.stringify(params, { arrayFormat: 'repeat' })
            },
@@ -49,11 +66,14 @@ const employeeApi = {
        }
     },
     async addEmployee(params:any) {
-        const newParams = { ...params }
-        console.log("new:",newParams)
-        console.log("newjoin:",typeof newParams.name)
+
         const url = `employee/`;
-        const response = await axiosClient.post(url,newParams ); 
+        const response = await axiosClient.post(url,{params: {
+            ...params,
+        },
+        headers: {
+         Authorization: `Bearer ${accessToken}`
+     },} ); 
       return response
     },
     
