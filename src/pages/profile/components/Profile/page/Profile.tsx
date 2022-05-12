@@ -2,8 +2,6 @@ import * as React from "react";
 import { Grid, Box } from "@mui/material";
 import CardInfor from "../components/CardInfor";
 import AboutMe from "../components/AboutMe";
-import Education from "../components/Education";
-import Employment from "../components/Employment";
 import { InformationProps } from "../../../../../types/models/information";
 
 interface Props {
@@ -19,14 +17,6 @@ const Profile = ({ profile }: Props) => {
         </Grid>
         <Grid item xs={12} lg={8}>
           <AboutMe profile={profile} />
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12} lg={4}>
-          <Education />
-        </Grid>
-        <Grid item xs={12} lg={8}>
-          <Employment />
         </Grid>
       </Grid>
     </Box>

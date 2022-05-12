@@ -44,7 +44,7 @@ const CardInformation = ({ manager }: Props) => {
       <Grid container>
         <Grid item xs={12}>
           <Link
-            to={`/manager/${manager.id}`}
+            to={`/manager/${manager.slug}`}
             style={{ textDecoration: "none" }}
           >
             <Typography

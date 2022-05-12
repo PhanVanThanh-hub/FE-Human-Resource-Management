@@ -44,8 +44,8 @@ export default function TableList({ memberGroup, idGroup }: Props) {
   const handleChangeSearch = (event: any) => {
     setValue(event.target.value);
   };
-  const toProfilePage = (idMember: number) => {
-    return history.replace(`/profile/${idMember}`);
+  const toProfilePage = (slug: string) => {
+    return history.replace(`/profile/${slug}`);
   };
   return (
     <Paper
@@ -150,7 +150,7 @@ export default function TableList({ memberGroup, idGroup }: Props) {
                   <TableCell key={member.id}>{index + 1}</TableCell>
                   <TableCell
                     sx={{ cursor: "pointer" }}
-                    onClick={() => toProfilePage(member.id)}
+                    onClick={() => toProfilePage(member.slug!)}
                   >
                     <Grid container spacing={2} sx={{ alignItems: "center" }}>
                       <Grid item>
