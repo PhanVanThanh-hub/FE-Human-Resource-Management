@@ -3,11 +3,12 @@ import employeeApi from "../../../api/employeeApi";
 import TableList from "../components/table";
 import { useParams } from "react-router-dom";
 import { getObjNthItem } from "../../../utils/helpers/function";
+import { InformationProps } from "../../../types/models/information";
 
 const GroupMember = () => {
-  const [memberGroup, setMemberGroup] = useState();
+  const [memberGroup, setMemberGroup] = useState<InformationProps[]>([]);
   const params = useParams();
-  const idGroup = getObjNthItem(params, 1);
+  const idGroup: number = getObjNthItem(params, 1);
 
   useEffect(() => {
     (async () => {

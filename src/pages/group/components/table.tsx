@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import SearchIcon from "@mui/icons-material/Search";
 import DividerUI from "../../../components/divider/DividerUI";
+import { GroupProps } from "../../../types/models/group";
 import {
   TableContainer,
   Table,
@@ -27,7 +28,7 @@ const head = [
 ];
 
 interface Props {
-  groups: any;
+  groups: GroupProps[];
 }
 
 export default function ListGroup({ groups }: Props) {
@@ -35,7 +36,6 @@ export default function ListGroup({ groups }: Props) {
   const handleChangeSearch = (event: any) => {
     setValue(event.target.value);
   };
-  console.log("group:", groups);
   return (
     <Paper
       elevation={0}
@@ -124,8 +124,8 @@ export default function ListGroup({ groups }: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {groups?.map((group: any, index: number) => {
-              return <InformationGroup group={group} />;
+            {groups?.map((group: GroupProps) => {
+              return <InformationGroup group={group} key={group.id} />;
             })}
           </TableBody>
         </Table>

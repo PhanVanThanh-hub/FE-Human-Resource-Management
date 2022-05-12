@@ -1,13 +1,4 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import { Avatar, Paper } from "@mui/material";
-import { CardHeader } from "@mui/material";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import SearchIcon from "@mui/icons-material/Search";
-import DividerUI from "../../../components/divider/DividerUI";
 import {
   TableContainer,
   Table,
@@ -15,13 +6,25 @@ import {
   TableCell,
   TableRow,
   TableHead,
+  Avatar,
+  Paper,
+  CardHeader,
+  Grid,
+  Typography,
+  InputAdornment,
+  IconButton,
+  OutlinedInput,
+  ButtonBase,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ButtonBase from "@mui/material/ButtonBase";
 import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
 import BlockTwoToneIcon from "@mui/icons-material/BlockTwoTone";
 import { useHistory } from "react-router-dom";
+import DividerUI from "../../../components/divider/DividerUI";
 import { InformationProps } from "../../../types/models/information";
+import { ROLE_STAFF } from "../../../constants/employee";
+import { formatPrice } from "../../../utils/helpers/function";
 
 const head = [
   "#",
@@ -34,16 +37,12 @@ const head = [
 ];
 
 interface Props {
-  memberGroup: any;
-  idGroup: any;
+  memberGroup: InformationProps[];
+  idGroup: number;
 }
 
 export default function TableList({ memberGroup, idGroup }: Props) {
   const history = useHistory();
-  const [value, setValue] = React.useState("");
-  const handleChangeSearch = (event: any) => {
-    setValue(event.target.value);
-  };
   const toProfilePage = (slug: string) => {
     return history.replace(`/profile/${slug}`);
   };
@@ -58,7 +57,6 @@ export default function TableList({ memberGroup, idGroup }: Props) {
         overflow: "hidden",
         marginBottom: "24px",
         border: "1px solid rgba(144, 202, 249, 0.46)",
-        background: "rgb(255, 255, 255)",
       }}
     >
       <CardHeader
@@ -82,8 +80,6 @@ export default function TableList({ memberGroup, idGroup }: Props) {
               lineHeight: "1.4375em",
             }}
             id="input-search-card-style1"
-            value={value}
-            onChange={handleChangeSearch}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton edge="end">
@@ -158,8 +154,6 @@ export default function TableList({ memberGroup, idGroup }: Props) {
                           sx={{
                             width: "40px",
                             height: "40px",
-                            color: "rgb(30, 136, 229)",
-                            background: "rgb(144, 202, 249)",
                           }}
                           src={member.avatar}
                         />
@@ -175,7 +169,7 @@ export default function TableList({ memberGroup, idGroup }: Props) {
                           }}
                         >
                           {member.first_name} {member.last_name}
-                          {member.role === "Manager" ? (
+                          {member.role === ROLE_STAFF.MANAGER ? (
                             <CheckCircleIcon
                               sx={{
                                 fontSize: "1.5rem",
@@ -209,7 +203,7 @@ export default function TableList({ memberGroup, idGroup }: Props) {
                   </TableCell>
                   <TableCell>{member.role}</TableCell>
                   <TableCell>{member.location}</TableCell>
-                  <TableCell>{member.earnings} $</TableCell>
+                  <TableCell>{formatPrice(member.earnings)}</TableCell>
                   <TableCell>{member.date_of_birth} </TableCell>
                   <TableCell sx={{ textAlign: "center" }} key="action">
                     <div

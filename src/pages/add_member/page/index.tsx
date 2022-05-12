@@ -10,8 +10,6 @@ import {
 } from "../../../types/models/information";
 import {
   postEmployee,
-  fetchData,
-  fetchDataSuccess,
   selectLoading,
 } from "../../../redux/employee/employeeSlice";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -36,7 +34,6 @@ const AddMember = () => {
         setListGroup(getGroups.data);
         const getRole = await roleApi.getAll();
         setListRole(getRole.data);
-        console.log("1234");
       } catch (error) {}
     })();
   }, []);

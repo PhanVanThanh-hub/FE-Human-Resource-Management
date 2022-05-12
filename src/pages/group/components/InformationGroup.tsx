@@ -13,14 +13,16 @@ import employeeApi from "../../../api/employeeApi";
 import { InformationProps } from "../../../types/models/information";
 import { formatPrice } from "../../../utils/helpers/function";
 import { useHistory } from "react-router-dom";
+import { GroupProps } from "../../../types/models/group";
+import { ROLE_STAFF } from "../../../constants/employee";
 
 interface Props {
-  group: any;
+  group: GroupProps;
 }
 
 const InformationGroup = ({ group }: Props) => {
   const [groupOverview, setGroupOverview] = useState<InformationProps[]>([]);
-  const [manager, setManger] = useState<any>();
+  const [manager, setManger] = useState<InformationProps>();
   const [total_salary, setSalary] = useState<number>(0);
   const history = useHistory();
   useEffect(() => {
@@ -29,7 +31,7 @@ const InformationGroup = ({ group }: Props) => {
         const res = await employeeApi.getEmployeeGroup(group.id);
         setGroupOverview(res.data);
         const manager = res.data.find(
-          (element: { role: string }) => element.role === "Manager"
+          (element: { role: string }) => element.role === ROLE_STAFF.MANAGER
         );
         setManger(manager);
         const salary = res.data
@@ -52,6 +54,7 @@ const InformationGroup = ({ group }: Props) => {
           color: "rgb(97, 97, 97)",
         },
       }}
+      key={group.id}
       onClick={toGroupDetailPage}
     >
       <TableCell>{group.name_group} </TableCell>
@@ -65,8 +68,10 @@ const InformationGroup = ({ group }: Props) => {
       </TableCell>
       <TableCell>
         <AvatarGroup max={3} sx={{ justifyContent: "left" }}>
-          {groupOverview.map((value: any, index: any) => {
-            return <Avatar alt="Remy Sharp" src={value.avatar} />;
+          {groupOverview.map((value: InformationProps) => {
+            return (
+              <Avatar alt="Remy Sharp" src={value.avatar} key={value.id} />
+            );
           })}
         </AvatarGroup>
       </TableCell>

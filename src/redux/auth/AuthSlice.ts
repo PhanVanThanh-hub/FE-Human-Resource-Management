@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import authApi from '../../api/authApi';
 import StorageKeys from '../../constants/storage-keys';
 import { RootState } from '../../app/store';
@@ -31,6 +31,12 @@ const AuthSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        logout(state,payload:PayloadAction){
+            console.log("logut")
+            localStorage.removeItem(StorageKeys.access)
+            localStorage.removeItem(StorageKeys.refresh)
+            localStorage.removeItem(StorageKeys.admin)
+        }
     },
     extraReducers: (builder) =>{
         builder.addCase(login.pending, (state) => {
@@ -42,6 +48,9 @@ const AuthSlice = createSlice({
  
 })
 
+export const {
+    logout
+  } = AuthSlice.actions;
 const authReducer = AuthSlice.reducer;
 export const selectIsAdmin = (state: RootState) => state.auth.accuracy;
 export default authReducer;
