@@ -5,7 +5,7 @@ const accessToken = localStorage.getItem(StorageKeys.access)
 
 const groupApi = {
     async getAll() {
-        const response = await axiosClient.get('getGroup/', {
+        const response = await axiosClient.get('group/', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -15,6 +15,19 @@ const groupApi = {
              
         }
      },
+    async addGroup(params:any){
+        const response = await axiosClient.post('group/', {params: {
+            ...params,
+        },
+        headers: {
+         Authorization: `Bearer ${accessToken}`
+     },} )
+     console.log("resp:",response)
+        return {
+            ...response,
+             
+        }
+    }
     
     
 

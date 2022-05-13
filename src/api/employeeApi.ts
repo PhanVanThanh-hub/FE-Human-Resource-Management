@@ -66,14 +66,16 @@ const employeeApi = {
        }
     },
     async addEmployee(params:any) {
-
+        const newParams = { ...params }
+       
+        const accessToken = localStorage.getItem(StorageKeys.access)
         const url = `employee/`;
-        const response = await axiosClient.post(url,{params: {
-            ...params,
-        },
-        headers: {
-         Authorization: `Bearer ${accessToken}`
-     },} ); 
+        const response = await axiosClient.post(url,newParams, {
+                
+            headers: {
+               Authorization: `Bearer ${accessToken}`
+            }
+      }); 
       return response
     },
     async getPayrollDetail(slug:any){

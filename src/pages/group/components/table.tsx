@@ -1,11 +1,5 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import { Paper } from "@mui/material";
-import { CardHeader } from "@mui/material";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 import DividerUI from "../../../components/divider/DividerUI";
 import { GroupProps } from "../../../types/models/group";
 import {
@@ -15,8 +9,15 @@ import {
   TableCell,
   TableRow,
   TableHead,
+  Typography,
+  Paper,
+  CardHeader,
+  IconButton,
+  Tooltip,
+  Modal,
 } from "@mui/material";
 import InformationGroup from "../components/InformationGroup";
+import AddGroupModal from "../modal/AddGroup";
 
 const head = [
   "#",
@@ -32,10 +33,9 @@ interface Props {
 }
 
 export default function ListGroup({ groups }: Props) {
-  const [value, setValue] = React.useState("");
-  const handleChangeSearch = (event: any) => {
-    setValue(event.target.value);
-  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Paper
       elevation={0}
@@ -60,28 +60,15 @@ export default function ListGroup({ groups }: Props) {
               lineHeight: "1.167",
             }}
           >
-            List member of group
+            List Group
           </Typography>
         }
         action={
-          <OutlinedInput
-            sx={{
-              borderRadius: "12px",
-              paddingLeft: "14px",
-              lineHeight: "1.4375em",
-            }}
-            id="input-search-card-style1"
-            value={value}
-            onChange={handleChangeSearch}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton edge="end">
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            }
-            placeholder="Search"
-          />
+          <Tooltip title="Add Group">
+            <IconButton onClick={handleOpen}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         }
       />
       <DividerUI />
@@ -130,6 +117,7 @@ export default function ListGroup({ groups }: Props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <AddGroupModal open={open} handleClose={handleClose} />
     </Paper>
   );
 }
