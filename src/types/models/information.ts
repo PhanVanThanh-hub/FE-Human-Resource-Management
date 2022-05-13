@@ -26,3 +26,10 @@ export interface RoleProps{
     id?:number;
     title:string;
 }
+
+export interface PayrollProps{
+    id?:number;
+    name:string;
+    salary:number;
+    date:string;
+}

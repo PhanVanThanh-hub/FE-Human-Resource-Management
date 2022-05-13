@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Tabs from "@mui/material/Tabs";
@@ -21,25 +20,6 @@ interface Props {
   Children: () => JSX.Element;
 }
 
-const TabPanel = ({ value, index, Children }: Props) => {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-    >
-      {value === index && (
-        <Box sx={{ paddingTop: "16px" }}>
-          <Typography>
-            <Children />
-          </Typography>
-        </Box>
-      )}
-    </div>
-  );
-};
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -52,6 +32,7 @@ const PageProfile01 = () => {
   const ProfileID = getObjNthItem(params, 1);
   const [profile, setProfile] = useState<InformationProps>();
   const [value, setValue] = useState(0);
+
   useEffect(() => {
     (async () => {
       try {
@@ -60,10 +41,10 @@ const PageProfile01 = () => {
       } catch (error) {}
     })();
   }, []);
+
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
   };
-  console.log("profile:", !profile);
   return (
     <Paper
       sx={{
@@ -149,13 +130,13 @@ const PageProfile01 = () => {
         </div>
         <div
           role="tabpanel"
-          hidden={value !== 0}
-          id={`simple-tabpanel-${0}`}
-          aria-labelledby={`simple-tab-${0}`}
+          hidden={value !== 1}
+          id={`simple-tabpanel-${1}`}
+          aria-labelledby={`simple-tab-${1}`}
         >
           {value === 1 && (
             <Box sx={{ paddingTop: "16px" }}>
-              <PayrollPage />
+              <PayrollPage earnings={profile?.earnings} ProfileID={ProfileID} />
             </Box>
           )}
         </div>

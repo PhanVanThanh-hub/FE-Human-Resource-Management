@@ -37,8 +37,8 @@ const employeeApi = {
             ...response,
         }
     },
-    getEmployeeDetail(id:any) {
-        const url = `/employee/${id}/`;
+    getEmployeeDetail(slug:any) {
+        const url = `/employee/${slug}/`;
         return axiosClient.get(url,{
             headers: {
              Authorization: `Bearer ${accessToken}`
@@ -76,6 +76,22 @@ const employeeApi = {
      },} ); 
       return response
     },
+    async getPayrollDetail(slug:any){
+        const url = `payroll/${slug}/`;
+        const response= await axiosClient.get(url,{
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    },
+    async getPayroll(){
+        const url = `payroll/`;
+        const response= await axiosClient.get(url,{
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    }
     
 
 }

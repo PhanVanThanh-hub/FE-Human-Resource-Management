@@ -99,6 +99,7 @@ export default function CardInfor({ profile }: Props) {
           {contact.map((value, index) => {
             return (
               <ListItemButton
+                key={index}
                 sx={{ padding: "10px 16px", color: "rgb(97, 97, 97)" }}
               >
                 <ListItemIcon

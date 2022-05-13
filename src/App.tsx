@@ -9,6 +9,7 @@ import DrawerContainer from "./layout/DrawerContainer";
 import GroupPage from "./pages/group/page/index";
 import AddMember from "./pages/add_member/page/index";
 import AuthPage from "./pages/auth/page/index";
+import DashboardPage from "./pages/dashboard/page/index";
 import { useAppSelector } from "./app/hooks";
 import { selectIsAdmin } from "./redux/auth/AuthSlice";
 import { IS_ADMIN } from "./constants/login";
@@ -21,6 +22,9 @@ function App() {
         <DrawerContainer>
           <Switch>
             <Route path="/" exact>
+              <DashboardPage />
+            </Route>
+            <Route path="/home" exact>
               <HomePage />
             </Route>
             <Route path="/manager" exact>
