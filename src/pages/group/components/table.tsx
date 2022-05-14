@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DividerUI from "../../../components/divider/DividerUI";
-import { GroupProps } from "../../../types/models/group";
+import { GroupProps } from "../../../types/models/information";
 import {
   TableContainer,
   Table,
@@ -30,9 +30,10 @@ const head = [
 
 interface Props {
   groups: GroupProps[];
+  addGroup: (value: GroupProps) => void;
 }
 
-export default function ListGroup({ groups }: Props) {
+export default function ListGroup({ groups, addGroup }: Props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -117,7 +118,11 @@ export default function ListGroup({ groups }: Props) {
           </TableBody>
         </Table>
       </TableContainer>
-      <AddGroupModal open={open} handleClose={handleClose} />
+      <AddGroupModal
+        open={open}
+        handleClose={handleClose}
+        addGroup={addGroup}
+      />
     </Paper>
   );
 }

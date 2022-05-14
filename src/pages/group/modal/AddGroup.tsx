@@ -1,14 +1,10 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import { Box, Button, Typography, Modal } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { GroupProps } from "../../../types/models/information";
 import InputField from "../../../components/form-control/InputField/index";
-import groupApi from "../../../api/groupApi";
 
 const style = {
   position: "absolute" as "absolute",
@@ -19,15 +15,16 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  p: "20px",
 };
 
 interface Props {
   open: boolean;
   handleClose: () => void;
+  addGroup: (value: GroupProps) => void;
 }
 
-export default function AddGroupModal({ open, handleClose }: Props) {
+export default function AddGroupModal({ open, handleClose, addGroup }: Props) {
   const initalValues: GroupProps = {
     name_group: "",
   } as GroupProps;
@@ -40,12 +37,15 @@ export default function AddGroupModal({ open, handleClose }: Props) {
     control,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm<GroupProps>({
     defaultValues: initalValues,
     resolver: yupResolver(schema),
   });
   const handleFormSubmit = async (formValues: GroupProps) => {
-    await groupApi.addGroup(formValues);
+    handleClose();
+    addGroup(formValues);
+    reset({ name_group: "" });
   };
   return (
     <Modal
@@ -55,9 +55,17 @@ export default function AddGroupModal({ open, handleClose }: Props) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography
+          sx={{
+            textAlign: "center",
+            marginBottom: "10px",
+            fontSize: "20px",
+            fontWeight: "600",
+          }}
+        >
           Add Group
         </Typography>
+
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <InputField name="name_group" control={control} label="Name Group" />
           <Button
@@ -65,7 +73,7 @@ export default function AddGroupModal({ open, handleClose }: Props) {
             variant="contained"
             color="primary"
             disabled={isSubmitting}
-            sx={{ textTransform: "none", marginBottom: "10px" }}
+            sx={{ textTransform: "none", marginTop: "10px", width: "100%" }}
           >
             Add Group
           </Button>

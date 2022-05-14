@@ -10,10 +10,12 @@ import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
 import BlockTwoToneIcon from "@mui/icons-material/BlockTwoTone";
 import ButtonBase from "@mui/material/ButtonBase";
 import employeeApi from "../../../api/employeeApi";
-import { InformationProps } from "../../../types/models/information";
+import {
+  InformationProps,
+  GroupProps,
+} from "../../../types/models/information";
 import { formatPrice } from "../../../utils/helpers/function";
 import { useHistory } from "react-router-dom";
-import { GroupProps } from "../../../types/models/group";
 import { ROLE_STAFF } from "../../../constants/employee";
 
 interface Props {
