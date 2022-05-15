@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { InformationProps } from "../../../types/models/information";
+import { formatPrice } from "../../../utils/helpers/function";
 
 interface Props {
   manager: InformationProps;
@@ -14,9 +15,8 @@ const CardInformation = ({ manager }: Props) => {
   return (
     <Box
       sx={{
-        width: "280px",
         borderRadius: "12px",
-        padding: "16px",
+        padding: "12px",
         border: "1px solid rgb(245, 245, 245)",
         boxShadow: "#2b2634cc 0px 2px 4px 0px",
         "&:hover": {
@@ -28,6 +28,8 @@ const CardInformation = ({ manager }: Props) => {
         sx={{
           width: "100%",
           marginBottom: "10px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <Avatar
@@ -40,16 +42,20 @@ const CardInformation = ({ manager }: Props) => {
           }}
           src={manager.avatar}
         />
-      </Box>
-      <Grid container>
-        <Grid item xs={12}>
+        <Box
+          sx={{
+            display: "flex",
+
+            flexDirection: "column",
+          }}
+        >
           <Link
             to={`/manager/${manager.slug}`}
             style={{ textDecoration: "none" }}
           >
             <Typography
               sx={{
-                fontSize: "1.25rem",
+                fontSize: "1.05rem",
                 fontWeight: "600",
 
                 "&:hover": {
@@ -74,8 +80,10 @@ const CardInformation = ({ manager }: Props) => {
               Manager:Group {manager.group}
             </Typography>
           </Link>
-        </Grid>
-        <Grid item xs={12}>
+        </Box>
+      </Box>
+      <Grid container>
+        <Grid item xs={12} sx={{ flexDirection: "row", display: "flex" }}>
           <Typography
             sx={{
               fontSize: " 0.75rem",
@@ -83,20 +91,65 @@ const CardInformation = ({ manager }: Props) => {
               lineHeight: "1.66",
             }}
           >
-            Email
+            Email:
           </Typography>
           <Typography
             sx={{
               fontSize: " 0.75rem",
               lineHeight: "1.6",
-              fontWeight: "500",
+              fontWeight: "600",
+              color: "rgb(33, 33, 33)",
             }}
           >
             {manager.email}
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Grid container spacing={3}>
+          <Grid container>
+            <Grid item xs={6} sx={{ flexDirection: "row", display: "flex" }}>
+              <Typography
+                sx={{
+                  fontSize: " 0.75rem",
+                  color: "rgb(158, 158, 158)",
+                  lineHeight: "1.66",
+                  marginRight: "5px",
+                }}
+              >
+                Join Date:
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: " 0.75rem",
+                  lineHeight: "1.6",
+                  fontWeight: "600",
+                  color: "rgb(33, 33, 33)",
+                }}
+              >
+                {manager.join_date}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ flexDirection: "row", display: "flex" }}>
+              <Typography
+                sx={{
+                  fontSize: " 0.75rem",
+                  color: "rgb(158, 158, 158)",
+                  lineHeight: "1.66",
+                  marginRight: "5px",
+                }}
+              >
+                Salary:
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: " 0.75rem",
+                  lineHeight: "1.6",
+                  fontWeight: "600",
+                  color: "rgb(33, 33, 33)",
+                }}
+              >
+                {formatPrice(manager.earnings)}
+              </Typography>
+            </Grid>
             <Grid item xs={6}>
               <Typography
                 sx={{
@@ -111,6 +164,8 @@ const CardInformation = ({ manager }: Props) => {
                 sx={{
                   fontSize: " 0.75rem",
                   lineHeight: "1.6",
+                  fontWeight: "600",
+                  color: "rgb(33, 33, 33)",
                 }}
               >
                 {manager.phone}
@@ -130,6 +185,8 @@ const CardInformation = ({ manager }: Props) => {
                 sx={{
                   fontSize: " 0.75rem",
                   lineHeight: "1.66",
+                  fontWeight: "600",
+                  color: "rgb(33, 33, 33)",
                 }}
               >
                 {manager.location}

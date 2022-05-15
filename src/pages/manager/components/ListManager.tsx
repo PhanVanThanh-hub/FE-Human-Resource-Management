@@ -27,7 +27,9 @@ export default function ListManager({ managers }: Props) {
     >
       <Grid
         container
+        spacing={3}
         sx={{
+          justifyContent: "center",
           margin: "10px 0px",
           "& .MuiGrid-item": {
             marginBottom: "10px",
@@ -38,7 +40,7 @@ export default function ListManager({ managers }: Props) {
           return (
             <Grid
               item
-              xs={4}
+              xs={5}
               key={manager.id}
               sx={{ display: "flex", justifyContent: "center" }}
             >
