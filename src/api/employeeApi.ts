@@ -17,6 +17,24 @@ const employeeApi = {
              
         }
      },
+     async getEmployeeSalary(params:any) {
+        var qs = require('qs');
+        const response = await axiosClient.get('employee_salary/', {
+            params: {
+                ...params,
+            },
+            paramsSerializer:  (params) => {
+                return qs.stringify(params, { arrayFormat: 'repeat' })
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        })
+        return {
+            ...response,
+            maxItem: 10,
+        }
+     },
      async getManager() {
          const params ={
              role:1
@@ -86,14 +104,15 @@ const employeeApi = {
          },});
          return response
     },
-    async getPayroll(){
+    async getPayroll(params:any){
         const url = `payroll/`;
         const response= await axiosClient.get(url,{
+            params:{...params},
             headers: {
              Authorization: `Bearer ${accessToken}`
          },});
          return response
-    }
+    },
     
 
 }

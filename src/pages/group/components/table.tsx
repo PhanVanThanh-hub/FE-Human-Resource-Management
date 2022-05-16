@@ -14,7 +14,6 @@ import {
   CardHeader,
   IconButton,
   Tooltip,
-  Modal,
 } from "@mui/material";
 import InformationGroup from "../components/InformationGroup";
 import AddGroupModal from "../modal/AddGroup";
