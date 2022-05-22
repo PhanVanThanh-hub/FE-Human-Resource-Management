@@ -4,12 +4,12 @@ import { InformationProps } from "../../../types/models/information";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 interface Props {
-  employee: InformationProps[];
+  employees: InformationProps[];
 }
 
-const SalaryInMonth = ({ employee }: Props) => {
+const SalaryInMonth = ({ employees }: Props) => {
   const title = "Salary Payable In 1 Month";
-  const salaryInMonth = employee.reduce(
+  const salaryInMonth = employees.reduce(
     (total: number, item: InformationProps) => total + item.earnings,
     0
   );

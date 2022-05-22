@@ -13,10 +13,10 @@ const authApi = {
         const url = '/api/token/';
         return axiosClient.post(url, data);
     },
-    async getUser(params:any) {
+    getUser(params:any) {
         const newParams = { ...params }
         const url = `users/`;
-        const response = await axiosClient.get(url, {
+        const response =  axiosClient.get(url, {
             params: { ...newParams },
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -24,9 +24,9 @@ const authApi = {
         }); 
         return response
     },
-    async getProfile(params:any) {
+    getProfile(params:any) {
         const data = { ...params }
-        const response = await axiosClient.post(`/detail/`, {
+        const response =  axiosClient.post(`/detail/`, {
             data: { ...data },
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -34,9 +34,9 @@ const authApi = {
         })
         return response
     },
-    async changeProfile(params:any) {
+    changeProfile(params:any) {
         const newParams = { ...params }
-        const response = await axiosClient.post(`/changeProfile/`, {
+        const response =  axiosClient.post(`/changeProfile/`, {
             data: { ...newParams },
             headers: {
                 Authorization: `Bearer ${accessToken}`

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import FormAddMember from "../components/FormAddMember";
 import roleApi from "../../../api/roleApi";
-import groupApi from "../../../api/groupApi";
 import {
   GroupProps,
   InformationProps,
@@ -15,9 +14,12 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { AppSweetaler } from "../../../components/sweetalert/index";
 import { unwrapResult } from "@reduxjs/toolkit";
+import {
+  selectListGroup,
+  fetchGroupList,
+} from "../../../redux/group/groupSlice";
 
 const AddMember = () => {
-  const [listGroup, setListGroup] = useState<GroupProps[]>([]);
   const [listRole, setListRole] = useState<RoleProps[]>([]);
   const [messages, setMessages] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
@@ -26,12 +28,13 @@ const AddMember = () => {
   const [typeSweetaler, setTypeSweetaler] = useState<string>("error");
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectLoading);
-
+  const groups: GroupProps[] = useAppSelector(selectListGroup);
+  useEffect(() => {
+    dispatch(fetchGroupList({}));
+  }, [dispatch, error]);
   useEffect(() => {
     (async () => {
       try {
-        const getGroups = await groupApi.getAll();
-        setListGroup(getGroups.data);
         const getRole = await roleApi.getAll();
         setListRole(getRole.data);
       } catch (error) {}
@@ -46,6 +49,7 @@ const AddMember = () => {
       .then((result) => {
         setMessages(result.message);
       });
+    setError(true);
   };
 
   useEffect(() => {
@@ -81,7 +85,7 @@ const AddMember = () => {
     <Box>
       {renderLoadingPage()}
       <FormAddMember
-        listGroup={listGroup}
+        listGroup={groups}
         listRole={listRole}
         AddMember={AddMember}
       />

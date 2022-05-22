@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse }  from 'axios';
 
 const axiosClient = axios.create({
     baseURL: 'http://127.0.0.1:8000/',
@@ -28,5 +28,7 @@ axios.interceptors.response.use(function (response) {
     // Do something with response error
     return Promise.reject(error);
   });
+
+  
 
 export default axiosClient

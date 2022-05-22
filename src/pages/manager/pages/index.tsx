@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ListManager from "../components/ListManager";
 import Box from "@mui/material/Box";
-import employeeApi from "../../../api/employeeApi";
 import { InformationProps } from "../../../types/models/information";
 import Information from "../components/Information";
-import groupApi from "../../../api/groupApi";
+import {
+  fetchData,
+  selectListManager,
+} from "../../../redux/manager/managerSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const ManagerPage = () => {
-  const [managers, setManagers] = useState<InformationProps[]>([]);
-  const [groups, setGroups] = useState<any>([]);
+  const dispatch = useAppDispatch();
+  const managers: InformationProps[] = useAppSelector(selectListManager);
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await employeeApi.getManager();
-        setManagers(res.data);
-        const getGroups = await groupApi.getAll();
-        setGroups(getGroups.data);
-      } catch (error) {}
-    })();
-  }, []);
+    dispatch(fetchData());
+  }, [dispatch]);
   return (
     <Box
       sx={{

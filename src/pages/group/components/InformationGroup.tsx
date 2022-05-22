@@ -30,7 +30,7 @@ const InformationGroup = ({ group }: Props) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await employeeApi.getEmployeeGroup(group.id);
+        const res = await employeeApi.getAll1({ group: group.id });
         setGroupOverview(res.data);
         const manager = res.data.find(
           (element: { role: string }) => element.role === ROLE_STAFF.MANAGER

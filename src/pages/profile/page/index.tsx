@@ -9,16 +9,18 @@ import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 import Profile from "../components/Profile/page/Profile";
 import { useParams } from "react-router-dom";
 import { getObjNthItem } from "../../../utils/helpers/function";
-import employeeApi from "../../../api/employeeApi";
-import { InformationProps } from "../../../types/models/information";
+import {
+  InformationProps,
+  PayrollProps,
+} from "../../../types/models/information";
 import PayrollPage from "../components/Payroll/page/index";
 import PaymentIcon from "@mui/icons-material/Payment";
-
-interface Props {
-  value: number;
-  index: number;
-  Children: () => JSX.Element;
-}
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  fetchData,
+  selectEmployee,
+  selectPayroll,
+} from "../../../redux/profile/profileSlice";
 
 function a11yProps(index: number) {
   return {
@@ -28,18 +30,14 @@ function a11yProps(index: number) {
 }
 
 const PageProfile01 = () => {
+  const dispatch = useAppDispatch();
   const params = useParams();
   const ProfileID = getObjNthItem(params, 1);
-  const [profile, setProfile] = useState<InformationProps>();
   const [value, setValue] = useState(0);
-
+  const profile: InformationProps = useAppSelector(selectEmployee);
+  const payroll: PayrollProps[] = useAppSelector(selectPayroll);
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await employeeApi.getEmployeeDetail(ProfileID);
-        setProfile(res.data);
-      } catch (error) {}
-    })();
+    dispatch(fetchData(ProfileID));
   }, []);
 
   const handleChange = (event: any, newValue: any) => {
@@ -136,7 +134,7 @@ const PageProfile01 = () => {
         >
           {value === 1 && (
             <Box sx={{ paddingTop: "16px" }}>
-              <PayrollPage earnings={profile?.earnings} ProfileID={ProfileID} />
+              <PayrollPage earnings={profile?.earnings} payroll={payroll} />
             </Box>
           )}
         </div>

@@ -4,12 +4,12 @@ import { InformationProps } from "../../../types/models/information";
 import PersonIcon from "@mui/icons-material/Person";
 
 interface Props {
-  employee: InformationProps[];
+  employees: InformationProps[];
 }
 
-const AmountUser = ({ employee }: Props) => {
+const AmountUser = ({ employees }: Props) => {
   const title = "Total User";
-  const total_staff = employee.length;
+  const total_staff = employees.length;
   return (
     <Statistics title={title} statistical={total_staff} icon={<PersonIcon />} />
   );

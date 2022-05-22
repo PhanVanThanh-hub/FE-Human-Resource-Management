@@ -2,11 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
  
 
-ListDrawerLive.propTypes = {
 
-};
-
-function ListDrawerLive(props) {
+function ListDrawerLive() {
     return (
         <div>
             <Box

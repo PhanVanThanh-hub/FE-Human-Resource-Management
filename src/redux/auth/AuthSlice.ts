@@ -32,7 +32,6 @@ const AuthSlice = createSlice({
     initialState,
     reducers: {
         logout(state,payload:PayloadAction){
-            console.log("logut")
             localStorage.removeItem(StorageKeys.access)
             localStorage.removeItem(StorageKeys.refresh)
             localStorage.removeItem(StorageKeys.admin)

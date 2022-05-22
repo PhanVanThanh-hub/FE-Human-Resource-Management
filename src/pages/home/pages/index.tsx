@@ -10,15 +10,15 @@ export default function HomePage() {
   const [listMember, setListMember] = useState<InformationProps[]>([]);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await employeeApi.getAll();
-        setListMember(res.data);
-        console.log("lse:", res.data);
-      } catch (error) {}
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const res = await employeeApi.getAll();
+  //       setListMember(res.data);
+  //       console.log("lse:", res.data);
+  //     } catch (error) {}
+  //   })();
+  // }, []);
   return (
     <Box
       sx={{

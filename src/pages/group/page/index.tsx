@@ -7,22 +7,22 @@ import {
   STATUS_ADD_GROUP,
   SWEETALERT2_ADD_GROUP,
 } from "../../../constants/group";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  selectListGroup,
+  fetchGroupList,
+} from "../../../redux/group/groupSlice";
 
 const GroupPage = () => {
-  const [groups, setGroups] = useState<any>([]);
   const [error, setError] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [label, setLabel] = useState<string>("");
   const [typeSweetaler, setTypeSweetaler] = useState<string>("error");
+  const dispatch = useAppDispatch();
+  const groups: GroupProps[] = useAppSelector(selectListGroup);
   useEffect(() => {
-    (async () => {
-      try {
-        const getGroups = await groupApi.getAll();
-        setGroups(getGroups.data);
-      } catch (error) {}
-    })();
-  }, [error]);
-
+    dispatch(fetchGroupList({}));
+  }, [dispatch, error]);
   const addGroup = async (value: GroupProps) => {
     setError(false);
     const resp = await groupApi.addGroup(value);

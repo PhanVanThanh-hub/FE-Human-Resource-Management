@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Statistics from "./Statistics";
-import { InformationProps } from "../../../types/models/information";
-import employeeApi from "../../../api/employeeApi";
+import { PayrollProps } from "../../../types/models/information";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 
 interface Props {
-  employee: InformationProps[];
+  payrolls: PayrollProps[];
 }
 
-const TotalSalary = ({ employee }: Props) => {
-  const [list, setList] = useState<any[]>([]);
-  useEffect(() => {
-    (async () => {
-      try {
-        employee.map(async (value: InformationProps) => {
-          const payroll = await employeeApi.getPayrollDetail(value.slug);
-          const total_income = payroll.data.reduce(
-            (total: any, item: any) => total + item.salary,
-            0
-          );
-          const staff = { name: value.slug, salary: total_income };
-          setList((list) => [...list, staff]);
-        });
-      } catch (error) {}
-    })();
-  }, [employee]);
+const TotalSalary = ({ payrolls }: Props) => {
   const title = "Total Salary Expense";
-  const totalSalary = list.reduce(
+  const totalSalary = payrolls.reduce(
     (total: number, item: any) => total + item.salary,
     0
   );

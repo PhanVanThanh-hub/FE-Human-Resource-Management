@@ -13,6 +13,11 @@ import { Bar } from "react-chartjs-2";
 import { PayrollProps } from "../../../types/models/information";
 import { Paper, Box, InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  selectPayrollPerYear,
+  fetchDataFilterPayroll,
+} from "../../../redux/dashboard/dashboardSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -39,20 +44,16 @@ const labels = [
 ];
 
 const PayrollPerYear = () => {
-  const [payroll, setPayroll] = useState<PayrollProps[]>([]);
+  const dispatch = useAppDispatch();
+  const payroll: PayrollProps[] = useAppSelector(selectPayrollPerYear);
   const yearNow = new Date().getFullYear();
   const [year, setYear] = useState<any>(yearNow);
   const handleChange = (event: SelectChangeEvent) => {
     setYear(event.target.value);
   };
   useEffect(() => {
-    (async () => {
-      try {
-        const payroll = await employeeApi.getPayroll({ release_year: year });
-        setPayroll(payroll.data);
-      } catch (error) {}
-    })();
-  }, [year]);
+    dispatch(fetchDataFilterPayroll({ release_year: year }));
+  }, [dispatch, year]);
   const range = (start: number, end: number) => {
     return Array(end - start + 1)
       .fill(0)

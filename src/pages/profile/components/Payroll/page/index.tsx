@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
 import { PayrollProps } from "../../../../../types/models/information";
 import TableSalary from "../components/TableSalary";
-import employeeApi from "../../../../../api/employeeApi";
 import OverviewSalary from "../components/OverviewSalary";
 
 interface Props {
-  ProfileID: any;
+  payroll: PayrollProps[];
   earnings?: number;
 }
 
-const PayrollPage = ({ ProfileID, earnings }: Props) => {
-  const [payroll, setPayroll] = useState<PayrollProps[]>([]);
-  useEffect(() => {
-    (async () => {
-      try {
-        const payroll = await employeeApi.getPayrollDetail(ProfileID);
-        setPayroll(payroll.data);
-      } catch (error) {}
-    })();
-  }, []);
+const PayrollPage = ({ payroll, earnings }: Props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={8}>

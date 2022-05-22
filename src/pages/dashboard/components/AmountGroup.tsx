@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
-import groupApi from "../../../api/groupApi";
+import React from "react";
 import { GroupProps } from "../../../types/models/information";
 import Statistics from "./Statistics";
 import GroupsIcon from "@mui/icons-material/Groups";
 
-const AmountGroup = () => {
-  const [groups, setGroups] = useState<GroupProps[]>([]);
-  useEffect(() => {
-    (async () => {
-      try {
-        const employee = await groupApi.getAll();
-        setGroups(employee.data);
-      } catch (error) {}
-    })();
-  }, []);
+interface Props {
+  groups: GroupProps[];
+}
+
+const AmountGroup = ({ groups }: Props) => {
   const title = "Total Groups";
   return (
     <Statistics

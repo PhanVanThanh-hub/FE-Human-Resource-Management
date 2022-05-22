@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import employeeApi from "../../../api/employeeApi";
 import {
   Paper,
   Typography,
@@ -16,24 +15,25 @@ import {
 import { InformationProps } from "../../../types/models/information";
 import { formatPrice } from "../../../utils/helpers/function";
 import { useHistory } from "react-router-dom";
+import {
+  fetchDataFilter,
+  selectEmployeeFilter,
+} from "../../../redux/dashboard/dashboardSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 interface Props {
-  employee: InformationProps[];
+  employees: InformationProps[];
 }
 
-const ListSalaryMember = ({ employee }: Props) => {
-  const [listMember, setListMember] = useState<InformationProps[]>([]);
+const ListSalaryMember = ({ employees }: Props) => {
+  const dispatch = useAppDispatch();
+  const listMember: InformationProps[] = useAppSelector(selectEmployeeFilter);
   const [page, setPage] = useState<number>(1);
   const SIZE_PAGE = 5;
-  const pagination = Math.ceil(employee.length / SIZE_PAGE);
+  const pagination = Math.ceil(employees.length / SIZE_PAGE);
   const history = useHistory();
   useEffect(() => {
-    (async () => {
-      try {
-        const employee = await employeeApi.getEmployeeSalary({ page: page });
-        setListMember(employee.data.results);
-      } catch (error) {}
-    })();
+    dispatch(fetchDataFilter({ page: page }));
   }, [page]);
   const changePage = (event: any, pageNumber: number) => {
     setPage(pageNumber);
@@ -41,6 +41,7 @@ const ListSalaryMember = ({ employee }: Props) => {
   const toProfileDetail = (slug: string) => {
     return history.push(`/profile/${slug}`);
   };
+  console.log("listMember:", listMember);
   return (
     <Paper
       sx={{

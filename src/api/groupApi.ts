@@ -1,21 +1,18 @@
 import axiosClient from "./axiosClient";
 import StorageKeys from "../constants/storage-keys";
-
- 
+import { ListResponse } from "../types/models/common";
+import { GroupProps } from "../types/models/information";
 
 const groupApi = {
     
-    async getAll() {
+    getAll() :Promise<ListResponse<GroupProps[]>>{
         const accessToken = localStorage.getItem(StorageKeys.access)
-        const response = await axiosClient.get('group/', {
+        const response = axiosClient.get('group/', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        return {
-            ...response,
-             
-        }
+        return response;
      },
     async addGroup(params:any){
         const newParams = { ...params }

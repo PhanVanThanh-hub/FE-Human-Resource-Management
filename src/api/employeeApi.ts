@@ -1,94 +1,82 @@
 import axiosClient from "./axiosClient";
 import StorageKeys from "../constants/storage-keys";
-
+import { InformationProps ,PayrollProps} from "../types/models/information";
+import { ListResponse } from "../types/models/common";
+ 
 const accessToken = localStorage.getItem(StorageKeys.access)
-
 const employeeApi = {
-    
-    async getAll() {
-        const response = await axiosClient.get('employee/',
+    async getAll1(params: any) {
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        return axiosClient.get('employee/',
         {
+            params: {
+            ...params,
+            },
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        return {
-            ...response,
-             
-        }
-     },
-     async getEmployeeSalary(params:any) {
-        var qs = require('qs');
-        const response = await axiosClient.get('employee_salary/', {
-            params: {
-                ...params,
-            },
-            paramsSerializer:  (params) => {
-                return qs.stringify(params, { arrayFormat: 'repeat' })
-            },
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-        })
-        return {
-            ...response,
-            maxItem: 10,
-        }
-     },
-     async getManager() {
-         const params ={
-             role:1
-         }
-        var qs = require('qs');
-        const response = await axiosClient.get('employee/', {
-            params: {
-                ...params,
-            },
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-            paramsSerializer:  (params) => {
-                return qs.stringify(params, { arrayFormat: 'repeat' })
-            },
-        })
-        return {
-            ...response,
-        }
     },
-    getEmployeeDetail(slug:any) {
+    getPayroll(params:any): Promise<ListResponse<PayrollProps[]>>{
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        const url = `payroll/`;
+        const response=  axiosClient.get(url,{
+            params:{...params},
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    },
+    getAll(params: any): Promise<ListResponse<InformationProps[]>> {
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        return axiosClient.get('employee/',
+        {
+            params: {
+            ...params,
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+         
+     },
+     getEmployeeSalary(params:any): Promise<ListResponse<InformationProps[]>> {
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        var qs = require('qs');
+        return axiosClient.get('employee_salary/', {
+            params: {
+                ...params,
+            },
+            paramsSerializer:  (params) => {
+                return qs.stringify(params, { arrayFormat: 'repeat' })
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        })
+        
+     },
+     getPayrollDetail(slug:any):Promise<ListResponse<PayrollProps[]>> {
+        const url = `payroll/${slug}/`;
+        const response=  axiosClient.get(url,{
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    },
+    getEmployeeDetail(slug:any):Promise<ListResponse<InformationProps>>  {
         const url = `/employee/${slug}/`;
         return axiosClient.get(url,{
             headers: {
              Authorization: `Bearer ${accessToken}`
          },});
     },
-    async getEmployeeGroup(idGroup:any) {
-        const params ={
-            group:idGroup
-        }
-       var qs = require('qs');
-       const response = await axiosClient.get('employee/', {
-           params: {
-               ...params,
-           },
-           headers: {
-            Authorization: `Bearer ${accessToken}`
-        },
-           paramsSerializer:  (params) => {
-               return qs.stringify(params, { arrayFormat: 'repeat' })
-           },
-       })
- 
-       return {
-           ...response,
-       }
-    },
-    async addEmployee(params:any) {
+    addEmployee(params:any) {
         const newParams = { ...params }
        
         const accessToken = localStorage.getItem(StorageKeys.access)
         const url = `employee/`;
-        const response = await axiosClient.post(url,newParams, {
+        const response =  axiosClient.post(url,newParams, {
                 
             headers: {
                Authorization: `Bearer ${accessToken}`
@@ -96,24 +84,6 @@ const employeeApi = {
       }); 
       return response
     },
-    async getPayrollDetail(slug:any){
-        const url = `payroll/${slug}/`;
-        const response= await axiosClient.get(url,{
-            headers: {
-             Authorization: `Bearer ${accessToken}`
-         },});
-         return response
-    },
-    async getPayroll(params:any){
-        const url = `payroll/`;
-        const response= await axiosClient.get(url,{
-            params:{...params},
-            headers: {
-             Authorization: `Bearer ${accessToken}`
-         },});
-         return response
-    },
-    
 
 }
 
