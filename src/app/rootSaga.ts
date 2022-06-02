@@ -5,6 +5,7 @@ import notificationSaga from '../redux/notifications/notificationsSaga';
 import dashboardSaga,{dashboardFilterSaga,dashboardSalaryPerYearSaga} from '../redux/dashboard/dashboardSage';
 import profileSaga from '../redux/profile/profileSage';
 import managerSaga from '../redux/manager/manageSaga';
+import employeeProfileSaga from '../redux/staff_profile/employeeProfileSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -15,6 +16,7 @@ export default function* rootSaga() {
         dashboardFilterSaga(),
         dashboardSalaryPerYearSaga(),
         profileSaga(),
-        managerSaga()
+        managerSaga(),
+        employeeProfileSaga()
     ]);
 }

@@ -6,6 +6,7 @@ const StorageKeys = {
     cart: 'cart_list',
     admin: 'is_admin',
     popular:'popular',
+    
    
 }
 

@@ -8,7 +8,7 @@ const month = new Date().getMonth() + 1;
 
 function* fetchEmployeeBirthdayList(){
     const responsive: ListResponse<InformationProps>= yield call(employeeApi.getAll,{
-        birthday:1
+        birthday:month
     });
     yield put(fetchEmployeeBirthday(responsive));
 }

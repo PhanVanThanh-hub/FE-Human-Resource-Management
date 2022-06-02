@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import HomePage from "./pages/home/pages/index";
 import ManagerPage from "./pages/manager/pages/index";
@@ -13,6 +13,8 @@ import DashboardPage from "./pages/dashboard/page/index";
 import { useAppSelector } from "./app/hooks";
 import { selectIsAdmin } from "./redux/auth/AuthSlice";
 import { IS_ADMIN } from "./constants/login";
+import HeaderStaff from "./components/header/staff";
+import ProfilePage from "./pages/home_staff/page/Profile";
 
 function App() {
   const loginInAdmin: string = useAppSelector(selectIsAdmin) || "";
@@ -50,7 +52,16 @@ function App() {
       );
     }
     if (loginInAdmin === `"${IS_ADMIN.NOT_ADMIN}"`) {
-      return <></>;
+      return (
+        <>
+          <HeaderStaff />
+          <Switch>
+            <Route path="/" exact>
+              <ProfilePage />
+            </Route>
+          </Switch>
+        </>
+      );
     }
     return (
       <Switch>

@@ -14,6 +14,7 @@ const authApi = {
         return axiosClient.post(url, data);
     },
     getUser(params:any) {
+        const accessToken = localStorage.getItem(StorageKeys.access)
         const newParams = { ...params }
         const url = `users/`;
         const response =  axiosClient.get(url, {
@@ -26,7 +27,7 @@ const authApi = {
     },
     getProfile(params:any) {
         const data = { ...params }
-        const response =  axiosClient.post(`/detail/`, {
+        const response =  axiosClient.post(`profile/`, {
             data: { ...data },
             headers: {
                 Authorization: `Bearer ${accessToken}`

@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, debounce, put, takeLatest } from "redux-saga/effects";
+import { call,   put, takeLatest } from "redux-saga/effects";
 import employeeApi from "../../api/employeeApi";
 import {fetchEmployeeListSuccess,fetchEmployeeList,fetchEmployeeListFailed} from './employeeSlice';
 import {ListResponse} from '../../types/models/common';
@@ -16,8 +16,7 @@ function* fetchEmployee(action: PayloadAction<any>){
 
 
 export default function* employeeSaga() {
-    //watch fetch student action
+ 
     yield takeLatest(fetchEmployeeList.type, fetchEmployee);
-
-    // yield debounce(500, studentActions.setFilterWithDebounce.type, handleSearchDebounce);
+ 
 }

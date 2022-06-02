@@ -12,6 +12,17 @@ export const login = createAsyncThunk(
             const response = await authApi.login(payload);
             localStorage.setItem(StorageKeys.access, response.data.access);
             localStorage.setItem(StorageKeys.refresh, response.data.refresh);
+            try{
+                const username = JSON.parse(response.config.data).username
+                const responseUser = await authApi.getUser({ username: username })
+                const user = {...responseUser.data[0]}
+                const responseProfile = await authApi.getProfile(user)   
+                const profile = {...responseProfile.data.user}
+                localStorage.setItem(StorageKeys.user, JSON.stringify(profile));
+            } catch (error){
+                console.log("error:",error)
+            }
+             
         } catch (error:any) {
             return error.message;
         }
@@ -20,11 +31,12 @@ export const login = createAsyncThunk(
 
 export interface Props{
     accuracy: string;
- 
+    user:any;
 }
 
 const initialState: Props = {
-    accuracy:localStorage.getItem(StorageKeys.admin)||""
+    accuracy:localStorage.getItem(StorageKeys.admin)||"",
+    user:"",
 }
 
 const AuthSlice = createSlice({
@@ -40,6 +52,7 @@ const AuthSlice = createSlice({
     extraReducers: (builder) =>{
         builder.addCase(login.pending, (state) => {
             state.accuracy = localStorage.getItem(StorageKeys.admin)||"";
+            state.user=localStorage.getItem(StorageKeys.user)||"";
           })
        
         
@@ -52,4 +65,5 @@ export const {
   } = AuthSlice.actions;
 const authReducer = AuthSlice.reducer;
 export const selectIsAdmin = (state: RootState) => state.auth.accuracy;
+export const selectUser = (state:RootState) =>state.auth.user;
 export default authReducer;

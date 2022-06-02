@@ -10,6 +10,7 @@ import notificationReducer from '../redux/notifications/notificationsSlice';
 import dashboardReducer from '../redux/dashboard/dashboardSlice';
 import profileReducer from '../redux/profile/profileSlice';
 import managerReducer from '../redux/manager/managerSlice';
+import employeeProfileReducer from '../redux/staff_profile/employeeProfileSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer =  combineReducers({
@@ -20,7 +21,8 @@ const rootReducer =  combineReducers({
     notification:notificationReducer,
     dashboard:dashboardReducer,
     profile:profileReducer,
-    manager:managerReducer
+    manager:managerReducer,
+    employeeProfile:employeeProfileReducer
 })
 
 export const store = configureStore({
