@@ -27,6 +27,7 @@ const employeeApi = {
          },});
          return response
     },
+  
     getAll(params: any): Promise<ListResponse<InformationProps[]>> {
         const accessToken = localStorage.getItem(StorageKeys.access)
         return axiosClient.get('employee/',
@@ -57,6 +58,7 @@ const employeeApi = {
         
      },
      getPayrollDetail(slug:any):Promise<ListResponse<PayrollProps[]>> {
+        const accessToken = localStorage.getItem(StorageKeys.access)
         const url = `payroll/${slug}/`;
         const response=  axiosClient.get(url,{
             headers: {

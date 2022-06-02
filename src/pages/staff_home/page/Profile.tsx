@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid, Box } from "@mui/material";
 import CardInfor from "../components/CardInfor";
 import AboutMe from "../components/AboutMe";
-import { InformationProps } from "../../../types/models/information";
 import StorageKeys from "../../../constants/storage-keys";
 
 const ProfilePage = () => {
@@ -12,7 +11,7 @@ const ProfilePage = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#e3f2fd",
         display: "flex",
         alignItems: "center",
         height: "100vh",

@@ -16,9 +16,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useAppDispatch } from "../../app/hooks";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../redux/auth/AuthSlice";
+import { Link } from "react-router-dom";
 
-const pages = ["Profile", "Group", "Payroll"];
-
+const pages = [
+  { label: "Profile", link: "" },
+  { label: "Group", link: "group/" },
+  { label: "Payroll", link: "payroll" },
+];
 const HeaderStaff = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -53,12 +57,14 @@ const HeaderStaff = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={page.link}>
+                <Button
+                  key={page.link}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.label}
+                </Button>
+              </Link>
             ))}
           </Box>
 

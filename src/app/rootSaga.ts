@@ -6,6 +6,7 @@ import dashboardSaga,{dashboardFilterSaga,dashboardSalaryPerYearSaga} from '../r
 import profileSaga from '../redux/profile/profileSage';
 import managerSaga from '../redux/manager/manageSaga';
 import employeeProfileSaga from '../redux/staff_profile/employeeProfileSaga';
+import staffPayrollSaga from '../redux/staff_payroll/staffPayrollSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
         dashboardSalaryPerYearSaga(),
         profileSaga(),
         managerSaga(),
-        employeeProfileSaga()
+        employeeProfileSaga(),
+        staffPayrollSaga()
     ]);
 }

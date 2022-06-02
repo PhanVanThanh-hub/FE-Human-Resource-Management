@@ -38,7 +38,7 @@ const PageProfile01 = () => {
   const payroll: PayrollProps[] = useAppSelector(selectPayroll);
   useEffect(() => {
     dispatch(fetchData(ProfileID));
-  }, []);
+  }, [ProfileID, dispatch]);
 
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);

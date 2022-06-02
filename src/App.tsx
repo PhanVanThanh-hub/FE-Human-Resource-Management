@@ -14,7 +14,8 @@ import { useAppSelector } from "./app/hooks";
 import { selectIsAdmin } from "./redux/auth/AuthSlice";
 import { IS_ADMIN } from "./constants/login";
 import HeaderStaff from "./components/header/staff";
-import ProfilePage from "./pages/home_staff/page/Profile";
+import ProfilePage from "./pages/staff_home/page/Profile";
+import PayrollPage from "./pages/staff_payroll/page/index";
 
 function App() {
   const loginInAdmin: string = useAppSelector(selectIsAdmin) || "";
@@ -58,6 +59,9 @@ function App() {
           <Switch>
             <Route path="/" exact>
               <ProfilePage />
+            </Route>
+            <Route path="/payroll">
+              <PayrollPage />
             </Route>
           </Switch>
         </>
