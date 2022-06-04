@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 
 const pages = [
   { label: "Profile", link: "" },
-  { label: "Group", link: "group/" },
+  { label: "Group", link: "group" },
   { label: "Payroll", link: "payroll" },
 ];
 const HeaderStaff = () => {

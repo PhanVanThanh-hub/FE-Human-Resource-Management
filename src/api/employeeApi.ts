@@ -41,6 +41,19 @@ const employeeApi = {
         })
          
      },
+     getAllStaffGroup(params: any): Promise<ListResponse<InformationProps[]>> {
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        return axiosClient.get('employee_staff/',
+        {
+            params: {
+            ...params,
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+         
+     },
      getEmployeeSalary(params:any): Promise<ListResponse<InformationProps[]>> {
         const accessToken = localStorage.getItem(StorageKeys.access)
         var qs = require('qs');

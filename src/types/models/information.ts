@@ -17,6 +17,22 @@ export interface InformationProps{
     slug?:string;
 }
 
+export interface InformationStaffProps{
+    id:number;
+    first_name:string;
+    last_name:string;
+    date_of_birth:any;
+    ethnicity:string;
+    full_time:boolean;
+    join_date:any;
+    location:string;
+    role:string;
+    sex:boolean;
+    email:string;
+    phone:string;
+    avatar:any;
+}
+
 export interface GroupProps{
     id?:number;
     name_group:string;
