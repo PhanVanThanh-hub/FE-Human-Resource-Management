@@ -66,6 +66,29 @@ const employeeApi = {
          },});
          return response
     },
+    getPayrollStaff(slug:any):Promise<ListResponse<PayrollProps[]>> {
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        const url = `staff_payroll/${slug.slug}/`;
+        const response=  axiosClient.get(url,{
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    },
+    getPayrollStaffPerYear(slug:any):Promise<ListResponse<PayrollProps[]>> {
+        console.log("slug:",slug)
+        const params={release_year:slug.year}
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        const url = `staff_payroll/${slug.slug}/`;
+        const response=  axiosClient.get(url,{
+            params: {
+                ...params,
+            },
+            headers: {
+             Authorization: `Bearer ${accessToken}`
+         },});
+         return response
+    },
     getEmployeeDetail(slug:any):Promise<ListResponse<InformationProps>>  {
         const url = `/employee/${slug}/`;
         return axiosClient.get(url,{

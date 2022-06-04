@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import employeeApi from "../../../api/employeeApi";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,6 +17,7 @@ import {
   selectPayrollPerYear,
   fetchDataFilterPayroll,
 } from "../../../redux/dashboard/dashboardSlice";
+import { range } from "../../../utils/helpers/function";
 
 ChartJS.register(
   CategoryScale,
@@ -54,11 +54,6 @@ const PayrollPerYear = () => {
   useEffect(() => {
     dispatch(fetchDataFilterPayroll({ release_year: year }));
   }, [dispatch, year]);
-  const range = (start: number, end: number) => {
-    return Array(end - start + 1)
-      .fill(0)
-      .map((_, idx) => start + idx);
-  };
   const FIRST_YEAR = 2019;
   const listYear = range(FIRST_YEAR, yearNow).reverse();
   const reportPayroll = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

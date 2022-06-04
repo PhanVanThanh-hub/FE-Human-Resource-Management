@@ -5,12 +5,14 @@ import { PayrollProps } from '../../types/models/information';
 
 export interface StaffPayrollState{
     loading:boolean;
+    payrollPerYear : PayrollProps[];
     payroll : PayrollProps[];
 }
 
 const initialState: StaffPayrollState = {
     loading: false,
-    payroll:[]
+    payrollPerYear:[],
+    payroll : [],
 }
 
  
@@ -21,6 +23,9 @@ const staffPayrollSlice = createSlice({
         fetchData(state,action:PayloadAction<any>){
             state.loading = true;
         },
+        fetchDataPerYear(state,action:PayloadAction<any>){
+            state.loading = true;
+        },
         fetchDataSuccess(state){
             state.loading = false;
         },
@@ -29,14 +34,18 @@ const staffPayrollSlice = createSlice({
         },
         setEmployeePayroll(state,action:PayloadAction<ListResponse<PayrollProps>>){
             state.payroll = action.payload.data
+        },
+        setEmployeePayrollPerYear(state,action:PayloadAction<ListResponse<PayrollProps>>){
+            state.payrollPerYear = action.payload.data
         }
     }
 });
 
 //Actions
-export const {fetchDataSuccess,fetchData,fetchDataFailed,setEmployeePayroll} = staffPayrollSlice.actions;
+export const {fetchDataSuccess,fetchData,fetchDataFailed,setEmployeePayroll,setEmployeePayrollPerYear,fetchDataPerYear} = staffPayrollSlice.actions;
 //Selectors
 export const selectLoading = (state: RootState) => state.staffPayroll.loading;
+export const selectPayrollPerYear = (state: RootState) => state.staffPayroll.payrollPerYear;
 export const selectPayroll = (state: RootState) => state.staffPayroll.payroll;
 
 //Reducer

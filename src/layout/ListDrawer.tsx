@@ -51,7 +51,7 @@ export default function ListDrawer() {
             </svg>
           }
         />
-        <ItemLinkCustomer
+        {/* <ItemLinkCustomer
           title={"Home"}
           to="/home"
           icon={
@@ -71,7 +71,7 @@ export default function ListDrawer() {
               <path d="M6.4 20a9 9 0 1 1 11.2 0z"></path>
             </svg>
           }
-        />
+        /> */}
 
         <ItemLinkCustomer
           title={"Manager"}
