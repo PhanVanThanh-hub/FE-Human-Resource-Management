@@ -34,14 +34,13 @@ const ListSalaryMember = ({ employees }: Props) => {
   const history = useHistory();
   useEffect(() => {
     dispatch(fetchDataFilter({ page: page }));
-  }, [page]);
+  }, [dispatch, page]);
   const changePage = (event: any, pageNumber: number) => {
     setPage(pageNumber);
   };
   const toProfileDetail = (slug: string) => {
     return history.push(`/profile/${slug}`);
   };
-  console.log("listMember:", listMember);
   return (
     <Paper
       sx={{

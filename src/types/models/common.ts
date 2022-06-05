@@ -3,5 +3,5 @@ export interface ListResponse<T> {
 }
 
 export interface ListResponseFilter<T> {
-    data:{results: T[]};
+    data:{results: T[],count:number};
 }

@@ -46,18 +46,16 @@ const HeaderStaff = () => {
             sx={{
               mr: 2,
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Employee Management System
           </Typography>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
             {pages.map((page) => (
-              <Link to={page.link}>
+              <Link to={page.link} style={{ textDecoration: "none" }}>
                 <Button
                   key={page.link}
                   sx={{ my: 2, color: "white", display: "block" }}

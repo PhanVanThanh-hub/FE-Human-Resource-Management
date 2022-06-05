@@ -17,6 +17,7 @@ import HeaderStaff from "./components/header/staff";
 import ProfilePage from "./pages/staff_home/page/Profile";
 import PayrollPage from "./pages/staff_payroll/page/index";
 import GroupStaffPage from "./pages/staff_group/page/index";
+import MemberPage from "./pages/member/page/index";
 
 function App() {
   const loginInAdmin: string = useAppSelector(selectIsAdmin) || "";
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/group/:id">
               <GroupMember />
+            </Route>
+            <Route path="/member">
+              <MemberPage />
             </Route>
             <Route path="/add_member">
               <AddMember />

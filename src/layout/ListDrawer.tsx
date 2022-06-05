@@ -5,6 +5,7 @@ import ItemLinkCustomer from "../components/list/ItemLinkCustomer";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function ListDrawer() {
   return (
@@ -72,7 +73,7 @@ export default function ListDrawer() {
             </svg>
           }
         /> */}
-
+        <ItemLinkCustomer title={"Member"} to="/member" icon={<PersonIcon />} />
         <ItemLinkCustomer
           title={"Manager"}
           to="/manager"
