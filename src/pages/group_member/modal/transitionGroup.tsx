@@ -61,6 +61,7 @@ export default function ModalTransitionGroup({
     setGroup(event.target.value as string);
   };
   const handleSubmit = () => {
+    console.log("Sa");
     transitionGroup(groupTransition, profileID, name, group);
     handleClose();
   };
