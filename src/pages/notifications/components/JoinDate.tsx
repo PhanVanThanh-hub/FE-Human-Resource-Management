@@ -26,8 +26,8 @@ const JoinDate = ({ listJoinDate, year, month }: Props) => {
     if (groupByDate.length === 0)
       return (
         <AlertNotification
-          title="Nothing to Birthday"
-          label="There is no employee birthday this month"
+          title="Nothing to JoinDate"
+          label="There is no employee join date this month"
         />
       );
 

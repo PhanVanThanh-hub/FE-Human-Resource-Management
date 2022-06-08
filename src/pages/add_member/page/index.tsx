@@ -62,7 +62,6 @@ const AddMember = () => {
       setLabel("");
       setTypeSweetaler("success");
     }
-    setError(true);
   }, [messages]);
   const renderLoadingPage = () => {
     if (loading)

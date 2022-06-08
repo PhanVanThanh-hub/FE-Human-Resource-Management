@@ -17,6 +17,18 @@ const memberApi = {
         })
          
      },
+    transitionGroup(params:any):Promise<any>{
+        const accessToken = localStorage.getItem(StorageKeys.access)
+        return axiosClient.post('transition_group/',
+        {
+            params: {
+            ...params,
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+    }
 
 
 }

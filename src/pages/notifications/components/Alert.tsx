@@ -32,10 +32,10 @@ const AlertNotification = ({ title, label }: Props) => {
       <Typography
         sx={{ margin: "0px 0px 4px", fontWeight: "700", fontSize: "16px" }}
       >
-        Nothing to Birthday
+        {title}
       </Typography>
       <Typography sx={{ fontSize: "15px", color: "rgba(34, 51, 84, 0.7)" }}>
-        There is no employee birthday this month
+        {label}
       </Typography>
     </Box>
   );

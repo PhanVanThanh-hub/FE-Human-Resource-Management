@@ -9,6 +9,7 @@ import employeeProfileSaga from '../redux/staff_profile/employeeProfileSaga';
 import {employeePayrollSaga,employeePayrollPerYearSaga} from '../redux/staff_payroll/staffPayrollSaga';
 import employeeGroupSaga from '../redux/staff_group/employeeGroupSaga';
 import memberSaga from '../redux/member/memberSaga';
+import groupMemberSaga from '../redux/group_member/groupMemberSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -25,5 +26,6 @@ export default function* rootSaga() {
         employeePayrollPerYearSaga(),
         employeeGroupSaga(),
         memberSaga(),
+        groupMemberSaga()
     ]);
 }

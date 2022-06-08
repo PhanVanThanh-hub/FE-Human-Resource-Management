@@ -115,7 +115,10 @@ const Notifications = () => {
                 textAlign: "center",
               }}
             >
-              You have <span style={{ color: "rgb(87, 202, 34)" }}>483</span>{" "}
+              You have{" "}
+              <span style={{ color: "rgb(87, 202, 34)" }}>
+                {listBirthday.length + listJoinDate.length}
+              </span>{" "}
               New Messages
             </Typography>
           </Box>

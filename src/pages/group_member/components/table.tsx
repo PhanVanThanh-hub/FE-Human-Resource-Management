@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   TableContainer,
   Table,
@@ -18,13 +18,13 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
-import BlockTwoToneIcon from "@mui/icons-material/BlockTwoTone";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import { useHistory } from "react-router-dom";
 import DividerUI from "../../../components/divider/DividerUI";
 import { InformationProps } from "../../../types/models/information";
 import { ROLE_STAFF } from "../../../constants/employee";
 import { formatPrice } from "../../../utils/helpers/function";
+import ModalTransitionGroup from "../modal/transitionGroup";
 
 const head = [
   "#",
@@ -39,10 +39,29 @@ const head = [
 interface Props {
   memberGroup: InformationProps[];
   idGroup: number;
+  transitionGroup: (
+    id: string,
+    profileID: number,
+    name: string,
+    group: number
+  ) => void;
 }
 
-export default function TableList({ memberGroup, idGroup }: Props) {
+export default function TableList({
+  memberGroup,
+  idGroup,
+  transitionGroup,
+}: Props) {
   const history = useHistory();
+  const [profileID, setProfileID] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const handleOpen = (id: number, name: string) => {
+    setOpen(true);
+    setProfileID(id);
+    setName(name);
+  };
+  const handleClose = () => setOpen(false);
   const toProfilePage = (slug: string) => {
     return history.replace(`/profile/${slug}`);
   };
@@ -216,13 +235,9 @@ export default function TableList({ memberGroup, idGroup }: Props) {
                     >
                       <ButtonBase
                         sx={{ color: "rgb(33, 150, 243)", padding: "12px" }}
+                        onClick={() => handleOpen(member.id, member.first_name)}
                       >
-                        <ChatBubbleTwoToneIcon />
-                      </ButtonBase>
-                      <ButtonBase
-                        sx={{ color: "rgb(216, 67, 21)", padding: "12px" }}
-                      >
-                        <BlockTwoToneIcon />
+                        <CompareArrowsIcon />
                       </ButtonBase>
                     </div>
                   </TableCell>
@@ -232,6 +247,14 @@ export default function TableList({ memberGroup, idGroup }: Props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <ModalTransitionGroup
+        open={open}
+        handleClose={handleClose}
+        name={name}
+        group={idGroup}
+        transitionGroup={transitionGroup}
+        profileID={profileID}
+      />
     </Paper>
   );
 }

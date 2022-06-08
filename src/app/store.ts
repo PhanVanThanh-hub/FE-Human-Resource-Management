@@ -14,6 +14,7 @@ import employeeProfileReducer from '../redux/staff_profile/employeeProfileSlice'
 import staffPayrollReducer from '../redux/staff_payroll/staffPayrollSlice';
 import employeeGroupReducer from '../redux/staff_group/employeeGroupSlice';
 import memberReducer from '../redux/member/memberSlice';
+import groupMemberReducer from '../redux/group_member/groupMemberSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer =  combineReducers({
@@ -28,7 +29,8 @@ const rootReducer =  combineReducers({
     employeeProfile:employeeProfileReducer,
     staffPayroll:staffPayrollReducer,
     employeeGroup:employeeGroupReducer,
-    member:memberReducer
+    member:memberReducer,
+    groupMember:groupMemberReducer
 })
 
 export const store = configureStore({
